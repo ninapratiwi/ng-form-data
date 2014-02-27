@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+- 2.0.0
+before_install:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+before_script:
+- npm install --quiet -g bower gulp karma protractor
+- npm install --quiet
+- bower install --quiet
+script: npm test
+env:
+  global:
+  - secure: VxBDEdYOHzEd7UHlGRBPJosTZE/W3G+B84XC1OPwAlLEJLRXOLO0qx2Bwoqt+R0waOam5ESpRthX1o8gRt9UFsH0+JcY+D+zpCeoEJ1QlkUKY0EJNtr9uLfrmmMBN0qxZ+6HwyTy437hXkIvMELr2GZYbd+gKqj0v9hJ3xV3V+U=
