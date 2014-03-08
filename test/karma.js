@@ -10,8 +10,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'lib/assets/javascripts/ng-form-data.ls',
-      'test/assets/javascripts/ng-form-data.spec.ls'
+      'bower_components/angular/angular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'lib/javascripts/ng-form-data.ls',
+      'test/javascripts/ng-form-data.spec.ls'
     ],
 
     // use dots reporter, as travis terminal does not support escaping sequences
@@ -24,7 +26,7 @@ module.exports = function(config) {
       // source files, that you wanna generate coverage for
       // do not include tests or libraries
       // (these files will be instrumented by Istanbul)
-      'lib/assets/javascripts/ng-form-data.ls': ['coverage']
+      'lib/javascripts/ng-form-data.ls': ['coverage']
     },
 
     // web server port

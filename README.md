@@ -1,11 +1,15 @@
 # ng-form-data
 > Distributed via
 
-[![Gem Version](https://badge.fury.io/rb/ng-form-data.png)](http://badge.fury.io/rb/ng-form-data) [![Bower version](https://badge.fury.io/bo/ng-form-data.png)](http://badge.fury.io/bo/ng-form-data)
+[![Version     ](http://img.shields.io/gem/v/ng-form-data.svg)                               ](https://rubygems.org/gems/ng-form-data)
+[![Bower version](https://badge.fury.io/bo/ng-form-data.png)](http://badge.fury.io/bo/ng-form-data)
 
 > Boilerplate for AngularJS module by Tom Chen
 
-[![Build Status](https://secure.travis-ci.org/tomchentw/ng-form-data.png)](http://travis-ci.org/tomchentw/ng-form-data) [![Coverage Status](https://coveralls.io/repos/tomchentw/ng-form-data/badge.png)](https://coveralls.io/r/tomchentw/ng-form-data) [![Code Climate](https://codeclimate.com/github/tomchentw/ng-form-data.png)](https://codeclimate.com/github/tomchentw/ng-form-data)  [![Dependency Status](https://gemnasium.com/tomchentw/ng-form-data.png)](https://gemnasium.com/tomchentw/ng-form-data)
+[![Travis CI   ](http://img.shields.io/travis/tomchentw/ng-form-data/master.svg)             ](https://travis-ci.org/tomchentw/ng-form-data)
+[![Quality     ](http://img.shields.io/codeclimate/github/tomchentw/ng-form-data.svg)        ](https://codeclimate.com/github/tomchentw/ng-form-data)
+[![Coverage    ](http://img.shields.io/coveralls/tomchentw/ng-form-data.svg)                 ](https://coveralls.io/r/tomchentw/ng-form-data)
+[![Dependencies](http://img.shields.io/gemnasium/tomchentw/ng-form-data.svg)                 ](https://gemnasium.com/tomchentw/ng-form-data)
 
 
 ## Project philosophy
@@ -53,7 +57,7 @@ And include in your `angular` module definition:
 
 ## Contributing
 
-[![devDependency Status](https://david-dm.org/tomchentw/ng-form-data/dev-status.png?branch=master)](https://david-dm.org/tomchentw/ng-form-data#info=devDependencies) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tomchentw/ng-form-data/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![devDependency Status](https://david-dm.org/tomchentw/ng-form-data/dev-status.svg?theme=shields.io)](https://david-dm.org/tomchentw/ng-form-data#info=devDependencies)
 
 1. Fork it ( http://github.com/tomchentw/ng-form-data/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)

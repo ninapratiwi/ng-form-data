@@ -1,14 +1,13 @@
-language: ruby
-rvm:
-- 2.0.0
+language: node_js
+node_js:
+- '0.10'
 before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-before_script:
-- npm install --quiet -g bower gulp karma protractor
-- npm install --quiet
-- bower install --quiet
-script: npm test
+addons:
+  sauce_connect: true
 env:
   global:
   - secure: VxBDEdYOHzEd7UHlGRBPJosTZE/W3G+B84XC1OPwAlLEJLRXOLO0qx2Bwoqt+R0waOam5ESpRthX1o8gRt9UFsH0+JcY+D+zpCeoEJ1QlkUKY0EJNtr9uLfrmmMBN0qxZ+6HwyTy437hXkIvMELr2GZYbd+gKqj0v9hJ3xV3V+U=
+  - secure: ox8SHcMvhy1KoohHOwx7UK+7Hl+x/ig0I3YdAY7IWDpgMZhNfyi8XLF6QxU5JQVP76zFTGKOQBBKwqBQO+XkyPLE+NIPjxNu1PB1P9ZoS78kc3kz3m+MNbzMzPV/KCbGREb5TCOkqqaf20cH4Pi8wUFnqev2Fi+Et0kPVE1INtg=
+  - secure: Lr5sJrQJ0ZdX6qhKJkRr4N4JL8EHYtryvWPjh1Z9aiszOxQUHi9OYQ/t4rEcDfVV1m+3pN+IeBOukxKDvjwtFJnI8bKCslx6k991ChLZLJ7r1cD4txR1zPfKoSSkMrb30HmZs2S0AggH1ILAfmdAWSGiOT0ZaR2+JNT0HqUnKtg=

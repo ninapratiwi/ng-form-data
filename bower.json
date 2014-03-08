@@ -32,6 +32,7 @@
     "vendor",
     "Gemfile",
     "gulpfile.ls",
+    "Makefile",
     "package.json",
     "Rakefile",
     "ng-form-data.gemspec"
