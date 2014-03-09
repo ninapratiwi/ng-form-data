@@ -1,15 +1,15 @@
 # ng-form-data
 > Distributed via
 
-[![Version     ](http://img.shields.io/gem/v/ng-form-data.svg)                               ](https://rubygems.org/gems/ng-form-data)
-[![Bower version](https://badge.fury.io/bo/ng-form-data.png)](http://badge.fury.io/bo/ng-form-data)
+[![Version     ](https://img.shields.io/gem/v/ng-form-data.svg)                               ](https://rubygems.org/gems/ng-form-data)
+[![Bower version](https://badge.fury.io/bo/ng-form-data.png)](https://badge.fury.io/bo/ng-form-data)
 
 > Boilerplate for AngularJS module by Tom Chen
 
-[![Travis CI   ](http://img.shields.io/travis/tomchentw/ng-form-data/master.svg)             ](https://travis-ci.org/tomchentw/ng-form-data)
-[![Quality     ](http://img.shields.io/codeclimate/github/tomchentw/ng-form-data.svg)        ](https://codeclimate.com/github/tomchentw/ng-form-data)
-[![Coverage    ](http://img.shields.io/coveralls/tomchentw/ng-form-data.svg)                 ](https://coveralls.io/r/tomchentw/ng-form-data)
-[![Dependencies](http://img.shields.io/gemnasium/tomchentw/ng-form-data.svg)                 ](https://gemnasium.com/tomchentw/ng-form-data)
+[![Travis CI   ](https://img.shields.io/travis/tomchentw/ng-form-data/master.svg)             ](https://travis-ci.org/tomchentw/ng-form-data)
+[![Quality     ](https://img.shields.io/codeclimate/github/tomchentw/ng-form-data.svg)        ](https://codeclimate.com/github/tomchentw/ng-form-data)
+[![Coverage    ](https://img.shields.io/coveralls/tomchentw/ng-form-data.svg)                 ](https://coveralls.io/r/tomchentw/ng-form-data)
+[![Dependencies](https://img.shields.io/gemnasium/tomchentw/ng-form-data.svg)                 ](https://gemnasium.com/tomchentw/ng-form-data)
 
 
 ## Project philosophy
@@ -59,7 +59,7 @@ And include in your `angular` module definition:
 
 [![devDependency Status](https://david-dm.org/tomchentw/ng-form-data/dev-status.svg?theme=shields.io)](https://david-dm.org/tomchentw/ng-form-data#info=devDependencies)
 
-1. Fork it ( http://github.com/tomchentw/ng-form-data/fork )
+1. Fork it ( https://github.com/tomchentw/ng-form-data/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
