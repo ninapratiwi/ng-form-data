@@ -1,12 +1,10 @@
-const FileWithFormDataInterceptor = 'FileWithFormDataInterceptor'
-
 (...) <-! describe 'module ng-form-data'
 beforeEach module 'ng-form-data'
 
 interceptor = void
 
-beforeEach !($inject) ->
-  interceptor := $inject.get FileWithFormDataInterceptor
+beforeEach inject !(FileWithFormDataInterceptor) ->
+  interceptor := FileWithFormDataInterceptor
 
 it 'should not transform $http config with pure json' !(...) ->
   const json = do
