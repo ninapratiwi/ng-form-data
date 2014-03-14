@@ -1,6 +1,6 @@
 {
   "name": "ng-form-data",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Support input[type=\"file\"] with ng-model and transparently submit with HTML5 FormData",
   "longDescription": "Support input[type=\"file\"] with ng-model and transparently submit with HTML5 FormData",
   "main": "ng-form-data.js",
