@@ -4,10 +4,6 @@
   "description": "Support input[type=\"file\"] with ng-model and transparently submit with HTML5 FormData",
   "longDescription": "Support input[type=\"file\"] with ng-model and transparently submit with HTML5 FormData",
   "main": "ng-form-data.js",
-  "scripts": {
-    "postinstall": "bower install",
-    "test": "make test"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tomchentw/ng-form-data"

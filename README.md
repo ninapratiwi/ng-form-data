@@ -4,7 +4,7 @@
 [![Version     ](https://img.shields.io/gem/v/ng-form-data.svg)                               ](https://rubygems.org/gems/ng-form-data)
 [![Bower version](https://badge.fury.io/bo/ng-form-data.png)](https://badge.fury.io/bo/ng-form-data)
 
-> Boilerplate for AngularJS module by Tom Chen
+> Support input[type="file"] with ng-model and transparently submit with HTML5 FormData
 
 [![Travis CI   ](https://img.shields.io/travis/tomchentw/ng-form-data/master.svg)             ](https://travis-ci.org/tomchentw/ng-form-data)
 [![Quality     ](https://img.shields.io/codeclimate/github/tomchentw/ng-form-data.svg)        ](https://codeclimate.com/github/tomchentw/ng-form-data)
