@@ -8,4 +8,8 @@ html(ng-app="demo")
     link(rel="stylesheet" href="/application.css")
     script(type="text/javascript" defer src="/application.js")
   body
-    h1 ng-form-data
+    include partials/header
+    div.container-fluid(role="main")
+      .page-header
+        h1 ng-form-data
+    include partials/footer
