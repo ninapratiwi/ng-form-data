@@ -4,7 +4,7 @@
     livereload.listen config.port.livereload
 
     gulp.watch 'client/views/**/*', <[ client:html ]>
-    gulp.watch <[ client/templates/**/* client/javascripts/**/* lib/javascripts/**/* ]>, <[ client:js ]>
+    gulp.watch <[ client/templates/**/* client/javascripts/**/* lib/javascripts/**/* ]>, <[ client:html client:js ]>
     gulp.watch 'client/stylesheets/**/*', <[ client:css ]>
 /*
  * Implementation details
@@ -51,13 +51,13 @@ gulp.task 'client:html' <[ client:html:partials client:js:partials ]> ->
   return gulp.src 'client/views/*.jade'
   .pipe gulp-jade do
     pretty: !config.env.is 'production'
-    locals: 
+    locals:
       highlight: ->
         hljs.highlight do
           path.extname it .substr 1
           fs.readFileSync it, 'utf8'
         .value
-        
+
   .pipe gulp.dest 'tmp/public'
   .pipe gulp-livereload(livereload)
 
