@@ -12,4 +12,29 @@ html(ng-app="demo")
     div.container-fluid(role="main")
       .page-header
         h1 ng-form-data
+      section.row(ng-controller="ImgurCtrl as imgur")
+        .col-xs-12.col-sm-6
+          form(role="form" name="imageForm" ng-submit="imgur.upload()")
+            .form-group
+              label(for="image_title") Title
+              input#image_file.form-control(type="text" ng-model="newImg.title")
+
+            .form-group
+              label(for="image_description") Description
+              textarea#image_description.form-control(ng-model="newImg.description")
+
+            .form-group
+              label(for="image_file") Image File
+              input#image_file(type="file" ng-model="newImg.image" required)
+
+            button.btn.btn-default.pull-right(type="submit") Submit
+        .col-xs-12.col-sm-6
+          .thumbnail(ng-show="image")
+            img(ng-src="{{ image.link }}")
+            .caption
+              h3(ng-bind="image.title")
+              p(ng-bind="image.description")
+              p
+                button.btn.btn-primary(ng-click="imgur.delete()") Delete Image
+
     include partials/footer
