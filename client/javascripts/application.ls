@@ -55,4 +55,3 @@ angular.module 'demo' <[
   @$inject = <[
      $scope   $http ]>
   !(@$scope, @$http) ->
-

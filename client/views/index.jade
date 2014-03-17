@@ -5,36 +5,31 @@ html(ng-app="demo")
     base(href="/")
     title ng-form-data
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+    link(rel="stylesheet" href="//yandex.st/highlightjs/8.0/styles/default.min.css")
     link(rel="stylesheet" href="/application.css")
     script(type="text/javascript" defer src="/application.js")
   body
     include partials/header
+
     div.container-fluid(role="main")
-      .page-header
-        h1 ng-form-data
-      section.row(ng-controller="ImgurCtrl as imgur")
-        .col-xs-12.col-sm-6
-          form(role="form" name="imageForm" ng-submit="imgur.upload()")
-            .form-group
-              label(for="image_title") Title
-              input#image_file.form-control(type="text" ng-model="newImg.title")
+      header.page-header
+        h1
+          | AngularJS upload module
+          br
+          small Seamless Integration of input[type="file"] using HTML5 FormData
 
-            .form-group
-              label(for="image_description") Description
-              textarea#image_description.form-control(ng-model="newImg.description")
+      section
+        include partials/imgur
+      section
+        .row
+          .col-xs-12.col-md-6
+            pre
+              code.language-html
+                != highlight('tmp/public/partials/imgur.html')
 
-            .form-group
-              label(for="image_file") Image File
-              input#image_file(type="file" ng-model="newImg.image" required)
-
-            button.btn.btn-default.pull-right(type="submit") Submit
-        .col-xs-12.col-sm-6
-          .thumbnail(ng-show="image")
-            img(ng-src="{{ image.link }}")
-            .caption
-              h3(ng-bind="image.title")
-              p(ng-bind="image.description")
-              p
-                button.btn.btn-primary(ng-click="imgur.delete()") Delete Image
+          .col-xs-12.col-md-6
+            pre
+              code.language-javascript
+                != highlight('tmp/.js-cache/application.js')
 
     include partials/footer
