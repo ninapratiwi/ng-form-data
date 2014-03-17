@@ -40,9 +40,14 @@ const livereload = tiny-lr!
 gulp.task 'client:html:partials' ->
   return gulp.src 'client/views/partials/*.jade'
   .pipe gulp-jade pretty: true
-  .pipe gulp.dest 'tmp/public/partials'
+  .pipe gulp.dest 'tmp/.html-cache/partials'
 
-gulp.task 'client:html' <[ client:html:partials client:js:ls ]> ->
+gulp.task 'client:js:partials' ->
+  return gulp.src 'client/javascripts/partials/*.ls'
+  .pipe gulp-livescript bare: true
+  .pipe gulp.dest 'tmp/.js-cache/partials'
+
+gulp.task 'client:html' <[ client:html:partials client:js:partials ]> ->
   return gulp.src 'client/views/*.jade'
   .pipe gulp-jade do
     pretty: !config.env.is 'production'
@@ -79,11 +84,6 @@ gulp.task 'client:css' <[ client:css:scss client:css:bower_components ]> ->
   .pipe gulp.dest 'tmp/public'
   .pipe gulp-livereload(livereload)
 
-gulp.task 'client:js:gcprettify' ->
-  stream = gulp.src 'bower_components/google-code-prettify/src/prettify.js'
-  stream.=pipe gulp-uglify! if config.env.is 'production'
-  return stream.pipe gulp.dest 'tmp/.js-cache'
-
 gulp.task 'client:templates' ->
   stream = gulp.src 'client/templates/**/*.jade'
   .pipe gulp-jade pretty: !config.env.is 'production'
@@ -95,13 +95,16 @@ gulp.task 'client:templates' ->
   return stream.pipe gulp.dest 'tmp/.js-cache'
 
 gulp.task 'client:js:ls' ->
-  stream = gulp.src 'client/javascripts/*.ls'
-  .pipe gulp-livescript!
+  stream = gulp.src <[
+    client/javascripts/application.ls
+    client/javascripts/**/*.ls
+  ]>
   .pipe gulp-concat 'application.js'
+  .pipe gulp-livescript!
   stream.=pipe gulp-uglify! if config.env.is 'production'
   return stream.pipe gulp.dest 'tmp/.js-cache'
 
-gulp.task 'client:js' <[ lib:js client:js:gcprettify client:templates client:js:ls ]> ->
+gulp.task 'client:js' <[ lib:js client:templates client:js:ls ]> ->
   return gulp.src [
     'bower_components/angular/angular.min.js'
     'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
