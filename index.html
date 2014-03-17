@@ -28,7 +28,44 @@
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code></pre></div><div class="col-xs-12 col-md-6"><pre><code class="language-javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span><span class="hljs-keyword">var</span> t;t=<span class="hljs-string">"ImgurInterceptor"</span>,angular.module(<span class="hljs-string">"demo"</span>,[<span class="hljs-string">"ui.bootstrap"</span>,<span class="hljs-string">"ng-form-data"</span>]).config([<span class="hljs-string">"$httpProvider"</span>].concat(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span>{</span>e.defaults.headers.common.Authorization=<span class="hljs-string">"Client-ID 7f621a4d42a20a7"</span>,e.interceptors.push(t)})).factory(t,[<span class="hljs-string">"$q"</span>].concat(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(t)</span>{</span><span class="hljs-keyword">return</span>{response:<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span>{</span><span class="hljs-keyword">var</span> n,a,o,i;<span class="hljs-keyword">return</span> n=e.data,a=n.data,o=n.success,i=n.status,e.data=a,o||(e=t.reject(e)),e}}})).controller(<span class="hljs-string">"ImgurCtrl"</span>,<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">t</span><span class="hljs-params">(t,e)</span>{</span><span class="hljs-keyword">this</span>.$scope=t,<span class="hljs-keyword">this</span>.$http=e}<span class="hljs-keyword">var</span> e=t.prototype;<span class="hljs-keyword">return</span> e.upload=<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span><span class="hljs-keyword">var</span> t,e=<span class="hljs-keyword">this</span>;t=<span class="hljs-keyword">this</span>.$scope.newImg,<span class="hljs-keyword">this</span>.$http.post(<span class="hljs-string">"https://api.imgur.com/3/image"</span>,t).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(t)</span>{</span><span class="hljs-keyword">var</span> n;<span class="hljs-keyword">return</span> n=t.data,e.$http.get(<span class="hljs-string">"https://api.imgur.com/3/image/"</span>+n.id).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(t)</span>{</span><span class="hljs-keyword">return</span> angular.extend(n,t.data),{data:n}})}).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(t)</span>{</span><span class="hljs-keyword">var</span> n,a;<span class="hljs-keyword">return</span> n=t.data,a=e.$scope,a.newImg=<span class="hljs-keyword">void</span> <span class="hljs-number">0</span>,a.image=n,a})},e[<span class="hljs-string">"delete"</span>]=<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span><span class="hljs-keyword">var</span> t,e=<span class="hljs-keyword">this</span>;t=<span class="hljs-keyword">this</span>.$scope.image,<span class="hljs-keyword">this</span>.$http[<span class="hljs-string">"delete"</span>](<span class="hljs-string">"https://api.imgur.com/3/image/"</span>+t.deletehash).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>e.$scope.image=<span class="hljs-keyword">void</span> <span class="hljs-number">0</span>})},t.$inject=[<span class="hljs-string">"$scope"</span>,<span class="hljs-string">"$http"</span>],t}())}).call(<span class="hljs-keyword">this</span>);</code></pre></div></div></section></div><footer><div class="container"><p>This project is created by <a href="https://github.com/tomchentw" target="_blank">@tomchentw</a> under <a href="http://tomchentw.mit-license.org" target="_blank">MIT License</a></p><ul class="list-inline"><li>Build with</li><li><a href="http://getbootstrap.com" target="_blank">#Bootstrap</a></li><li><a href="http://angularjs.org" target="_blank">#AngularJS</a></li><li><a href="https://github.com/bower/bower" target="_blank">#Bower</a></li><li><a href="http://gulpjs.com" target="_blank">#gulpjs</a></li></ul></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code></pre></div><div class="col-xs-12 col-md-6"><pre><code class="language-javascript">angular.module(<span class="hljs-string">'demo'</span>).controller(<span class="hljs-string">'ImgurCtrl'</span>, (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+  <span class="hljs-keyword">var</span> prototype = constructor.prototype;
+  prototype.upload = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+    <span class="hljs-keyword">var</span> newImg, <span class="hljs-keyword">this</span>$ = <span class="hljs-keyword">this</span>;
+    newImg = <span class="hljs-keyword">this</span>.$scope.newImg;
+    <span class="hljs-keyword">this</span>.$http.post(<span class="hljs-string">'https://api.imgur.com/3/image'</span>, newImg).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(arg$)</span>{</span>
+      <span class="hljs-comment">/*!
+       * imgur bug, it won't return title and description
+       * need to get it again
+       */</span>
+      <span class="hljs-keyword">var</span> data;
+      data = arg$.data;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>$.$http.get(<span class="hljs-string">"https://api.imgur.com/3/image/"</span> + data.id).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(response)</span>{</span>
+        angular.extend(data, response.data);
+        <span class="hljs-keyword">return</span> {
+          data: data
+        };
+      });
+    }).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(arg$)</span>{</span>
+      <span class="hljs-keyword">var</span> data, ref$;
+      data = arg$.data;
+      <span class="hljs-keyword">return</span> ref$ = <span class="hljs-keyword">this</span>$.$scope, ref$.newImg = <span class="hljs-keyword">void</span> <span class="hljs-number">8</span>, ref$.image = data, ref$;
+    });
+  };
+  prototype[<span class="hljs-string">'delete'</span>] = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+    <span class="hljs-keyword">var</span> image, <span class="hljs-keyword">this</span>$ = <span class="hljs-keyword">this</span>;
+    image = <span class="hljs-keyword">this</span>.$scope.image;
+    <span class="hljs-keyword">this</span>.$http[<span class="hljs-string">'delete'</span>](<span class="hljs-string">"https://api.imgur.com/3/image/"</span> + image.deletehash).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+      <span class="hljs-keyword">this</span>$.$scope.image = <span class="hljs-keyword">void</span> <span class="hljs-number">8</span>;
+    });
+  };
+  constructor.$inject = [<span class="hljs-string">'$scope'</span>, <span class="hljs-string">'$http'</span>];
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">constructor</span><span class="hljs-params">($scope, $http)</span>{</span>
+    <span class="hljs-keyword">this</span>.$scope = $scope;
+    <span class="hljs-keyword">this</span>.$http = $http;
+  }
+  <span class="hljs-keyword">return</span> constructor;
+}()));</code></pre></div></div></section></div><footer><div class="container"><p>This project is created by <a href="https://github.com/tomchentw" target="_blank">@tomchentw</a> under <a href="http://tomchentw.mit-license.org" target="_blank">MIT License</a></p><ul class="list-inline"><li>Build with</li><li><a href="http://getbootstrap.com" target="_blank">#Bootstrap</a></li><li><a href="http://angularjs.org" target="_blank">#AngularJS</a></li><li><a href="https://github.com/bower/bower" target="_blank">#Bower</a></li><li><a href="http://gulpjs.com" target="_blank">#gulpjs</a></li></ul></div></footer><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
