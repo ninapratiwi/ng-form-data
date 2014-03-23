@@ -30,6 +30,7 @@ require! {
   'connect-livereload'
 }
 require! {
+  '../lib/gulpfile'
   '../config'
 }
 

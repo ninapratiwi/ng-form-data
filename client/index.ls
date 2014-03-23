@@ -2,7 +2,6 @@ require! {
   gulp
 }
 require! {
-  '../lib/gulpfile'
   './gulpfile'
 }
 

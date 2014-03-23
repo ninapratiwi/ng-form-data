@@ -1,18 +1,8 @@
 require! {
-  connect
+  gulp
 }
-
 require! {
-  '../config'
+  './gulpfile'
 }
 
-const server = connect!
-
-unless config.env.is 'production'
-  require! 'connect-livereload'
-  server.use connect-livereload!
-
-server.use connect.static 'public'
-server.use connect.static 'tmp/public'
-
-server.listen config.port.express
+gulp.start 'server'

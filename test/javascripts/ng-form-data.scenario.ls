@@ -1,3 +1,7 @@
 (...) <-! describe 'module ng-form-data'
-it 'should run scenario' !(...) ->
-  expect true .toBeTruthy!
+const ptor      = protractor.getInstance!
+
+it 'should work' !(...) ->
+  ptor.get '/'
+
+  expect element(by.css '.navbar-brand').getText! .toBe 'ng-form-data'
