@@ -1,3 +1,7 @@
+require! {
+  path
+}
+
 (...) <-! describe 'module ng-form-data'
 const ptor      = protractor.getInstance!
 
@@ -10,10 +14,11 @@ describe 'input[type="file"] directive' !(...) ->
   it 'should allow single file input' !(...) ->
     ptor.get '/'
 
-    element(by.id 'image_file').sendKeys "#{ process.cwd! }/test/fixtures/screenshot.png"
+    const filepath = path.join process.cwd!, '/test/fixtures/screenshot.png'
+    element(by.id 'image_file').sendKeys filepath
     browser.driver.sleep 500
 
     element(by.css '[type="submit"]').click!
-    browser.driver.sleep 10000
+    browser.driver.sleep 15000
 
     expect element(by.css '.thumbnail > img:nth-child(2)').getAttribute('src') .toContain 'http://i.imgur.com/'
