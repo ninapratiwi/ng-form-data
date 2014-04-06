@@ -10,8 +10,8 @@ html(ng-app="demo")
     meta(property="og:title" content="AngularJS upload module")
     meta(property="og:description" content="Seamless Integration of input[type=\"file\"] using HTML5 FormData")
     link(rel="stylesheet" href="//yandex.st/highlightjs/8.0/styles/default.min.css")
-    link(rel="stylesheet" href="/application.css")
-    script(type="text/javascript" defer src="/application.js")
+    link(rel="stylesheet" href=stylesheetLinkTag("application.css"))
+    script(type="text/javascript" defer src=javascriptIncludeTag("application.js"))
   body
     include partials/header
 

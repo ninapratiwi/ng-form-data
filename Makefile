@@ -1,4 +1,6 @@
 bin           := ./node_modules/.bin
+gulp					:= $(bin)/gulp --require LiveScript --cwd ./
+
 releaseBranch := gh-pages
 developBranch := master
 
@@ -18,15 +20,18 @@ newPublishMsg = "chore(publish): v$(version) by Makefile"
 
 install:
 	mkdir -p tmp
-	gem install sass
+	gem query sass --installed || gem install sass
 	npm install
 	$(bin)/bower install
 
-clean:
-	rm -rf node_modules bower_components tmp pkg
+clean.tmp:
+	rm -rf tmp pkg
+
+clean: clean.tmp
+	rm -rf node_modules bower_components
 
 server: install
-	$(bin)/lsc server
+	$(gulp) --gulpfile ./server/gulpfile.ls server
 
 test.karma: install
 	$(bin)/karma start test/karma.js
@@ -37,7 +42,7 @@ endif
 
 test.protractor: install
 	# start
-	$(bin)/lsc server & echo $$! > tmp/pid
+	$(gulp) --gulpfile ./server/gulpfile.ls server & echo $$! > tmp/pid
 	sleep 10
 	curl -I http://localhost:5000/
 	# run
@@ -51,20 +56,20 @@ test.mocha: install
 
 test: $(testDeps)
 
-release: install
-	NODE_ENV=production $(bin)/lsc client
+release: clean.tmp install
+	NODE_ENV=production $(gulp) --gulpfile ./client/gulpfile.ls client
 
-ifeq (true, releaseStatic)
+ifeq (true, $(releaseStatic))
 	cp -r public/* $(tempFolder)
 	cp -r tmp/public/* $(tempFolder)
 	git checkout $(releaseBranch)
-else	
+else
 	cp -r public $(tempFolder)
 	cp -r tmp/public/* $(tempFolder)/public
 	make clean
 	cp -r . $(tempFolder)
+	rm -rf $(tempFolder)/client
 	git checkout $(releaseBranch)
-	rm -rf client
 endif
 
 	git clean -f -d
@@ -83,7 +88,7 @@ lib: install
 	$(bin)/karma start --auto-watch --no-single-run test/karma.js
 
 publish.gulp: test
-	$(bin)/lsc index.ls
+	$(gulp) publish
 	git add -A
 	git commit -m $(newPublishMsg)
 	git tag -a v$(version) -m $(newPublishMsg)
