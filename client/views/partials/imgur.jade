@@ -3,17 +3,17 @@
     form(role="form" name="imageForm" ng-submit="imgur.upload()")
       .form-group
         label(for="image_title") Title
-        input#image_title.form-control(type="text" ng-model="newImg.title")
+        input#image_title.form-control(ga type="text" ng-model="newImg.title")
 
       .form-group
         label(for="image_description") Description
-        textarea#image_description.form-control(ng-model="newImg.description")
+        textarea#image_description.form-control(ga ng-model="newImg.description")
 
       .form-group
         label(for="image_file") Image File
-        input#image_file(type="file" ng-model="newImg.image" required)
+        input#image_file(ga type="file" ng-model="newImg.image" required)
 
-      button.btn.btn-default.pull-right(type="submit") Submit
+      button.btn.btn-default.pull-right(ga type="submit") Submit
   .col-xs-12.col-sm-6
     .thumbnail
       img(ng-hide="image" src="http://placekitten.com/320/240")
@@ -22,4 +22,4 @@
         h3(ng-bind="image.title")
         p(ng-bind="image.description")
         p
-          button.btn.btn-primary(ng-click="imgur.delete()") Delete Image
+          button.btn.btn-primary(ga ng-click="imgur.delete()") Delete Image

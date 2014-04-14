@@ -1,4 +1,4 @@
-(...) <-! describe 'module ng-form-data'
+(...) <-! describe 'ng-form-data module'
 beforeEach module 'ng-form-data'
 
 interceptor = void

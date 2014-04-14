@@ -1,7 +1,8 @@
 const ImgurInterceptor = 'ImgurInterceptor'
 
-angular.module 'demo' <[
+angular.module 'application' <[
   ui.bootstrap
+  ga
   ng-form-data
 ]>
 .config <[

@@ -2,7 +2,7 @@ require! {
   path
 }
 
-(...) <-! describe 'module ng-form-data'
+(...) <-! describe 'ng-form-data module'
 const ptor      = protractor.getInstance!
 
 it 'should work' !(...) ->

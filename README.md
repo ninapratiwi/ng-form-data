@@ -1,15 +1,15 @@
 # ng-form-data
 > Distributed via
 
-[![Version     ](https://img.shields.io/gem/v/ng-form-data.svg)                               ](https://rubygems.org/gems/ng-form-data)
-[![Bower version](https://badge.fury.io/bo/ng-form-data.png)](https://badge.fury.io/bo/ng-form-data)
+[![Version     ](https://img.shields.io/gem/v/ng-form-data.svg)                                     ](https://rubygems.org/gems/ng-form-data)
+[![Bower version](https://badge.fury.io/bo/ng-form-data.svg)                                        ](https://badge.fury.io/bo/ng-form-data)
 
 > Support input[type="file"] with ng-model and transparently submit with HTML5 FormData
 
-[![Travis CI   ](https://img.shields.io/travis/tomchentw/ng-form-data/master.svg)             ](https://travis-ci.org/tomchentw/ng-form-data)
-[![Quality     ](https://img.shields.io/codeclimate/github/tomchentw/ng-form-data.svg)        ](https://codeclimate.com/github/tomchentw/ng-form-data)
-[![Coverage    ](https://img.shields.io/coveralls/tomchentw/ng-form-data.svg)                 ](https://coveralls.io/r/tomchentw/ng-form-data)
-[![Dependencies](https://img.shields.io/gemnasium/tomchentw/ng-form-data.svg)                 ](https://gemnasium.com/tomchentw/ng-form-data)
+[![Travis CI   ](https://travis-ci.org/tomchentw/ng-form-data.svg?branch=master)                    ](https://travis-ci.org/tomchentw/ng-form-data)
+[![Quality     ](https://img.shields.io/codeclimate/github/tomchentw/ng-form-data.svg)              ](https://codeclimate.com/github/tomchentw/ng-form-data)
+[![Coverage    ](https://img.shields.io/coveralls/tomchentw/ng-form-data.svg)                       ](https://coveralls.io/r/tomchentw/ng-form-data)
+[![Dependencies](https://gemnasium.com/tomchentw/ng-form-data.svg)                                  ](https://gemnasium.com/tomchentw/ng-form-data)
 
 
 ## Project philosophy
@@ -30,6 +30,7 @@ Then include them through script tag in your HTML.
 ### **Rails** projects (Only support 3.1+)
 
 Add this line to your application's Gemfile:
+
 ```ruby
 gem 'ng-form-data'
 ```
@@ -42,14 +43,14 @@ Then add these lines to the top of your `app/assets/javascripts/application.js` 
 
 ```javascript
 //= require angular
-//= require ng-form-data
+//= require tc-ng-boilerplate
 ```
 
 And include in your `angular` module definition:
-    
-    /* 'tomchentw.boilerplate' module.
-     */    
-    var module = angular.module('my-awesome-project', ['tomchentw.boilerplate']).
+
+```javascript
+var module = angular.module('my-awesome-project', ['tomchentw.boilerplate']).
+```
 
 
 ## Usage
