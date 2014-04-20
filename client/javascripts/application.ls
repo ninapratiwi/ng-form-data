@@ -4,6 +4,7 @@ angular.module 'application' <[
   ui.bootstrap
   ga
   ng-form-data
+  angular-loading-bar
 ]>
 .config <[
         $httpProvider
