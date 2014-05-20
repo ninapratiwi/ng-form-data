@@ -1,6 +1,6 @@
 /*global angular:false*/
 let angular = angular, element = angular.element, forEach = angular.forEach, identity = angular.identity, isObject = angular.isObject, lowercase = angular.lowercase, FileWithFormDataInterceptor = 'FileWithFormDataInterceptor', toString$ = {}.toString
-
+# TODO
   function typeOf (object)
     toString$.call object .slice 8, -1
 
@@ -9,32 +9,34 @@ let angular = angular, element = angular.element, forEach = angular.forEach, ide
     "#keyPrefix#key"
 
   const httpBackendWithIframeTransport = <[
-         $delegate  $document
-  ]> ++ ($delegate, $document) ->
+         $delegate  $browser  $document  $rootScope
+  ]> ++ ($delegate, $browser, $document, $rootScope) ->
+    const $browserDefer = $browser.defer
+
     #
     # https://github.com/angular/angular.js/blob/master/src/ng/httpBackend.js#L43
     #
     !(method, url, post, callback, headers, timeout, withCredentials, responseType) ->
       const matcher = lowercase method .match /^iframe:(\S+)/i
       return $delegate ...& unless matcher
+      $browser.$$incOutstandingRequestCount!
 
       const name = "iframe-#{ Date.now! }"
-      const $form = element '<form></form>' .addClass 'ng-hide' .attr do
+      const $form = element '<form class="ng-hide"></form>' .attr do
         enctype: 'multipart/form-data'
         method: matcher.1
         action: url
         target: name
       forEach post, !-> $form.append it
 
-      const $iframe = element '<iframe></iframe>' .addClass 'ng-hide' .attr do
+      const $iframe = element '<iframe class="ng-hide"></iframe>' .attr do
         src: 'javascript:false;'
         name: name
         id: name
 
       # The first load event gets fired after the iframe has been injected
       # into the DOM, and is used to prepare the actual submission.
-      $iframe.one 'load' !->
-
+      .one 'load' !->
         # The second load event gets fired when the response to the form
         # submission is received. The implementation detects whether the
         # actual payload is embedded in a `<textarea>` element, and
@@ -43,30 +45,9 @@ let angular = angular, element = angular.element, forEach = angular.forEach, ide
           const doc = if @contentWindow then that.document else
             if @contentDocument then that else @document
           const root = if doc.documentElement then doc.documentElement else doc.body
-          const value = if root then root.textContent || root.innerText else null
+          const response = if root then root.textContent || root.innerText else null
 
-          console.log value
-
-
-          # textarea = root.getElementsByTagName("textarea")[0],
-          # type = textarea && textarea.getAttribute("data-type") || null,
-          # status = textarea && textarea.getAttribute("data-status") || 200,
-          # statusText = textarea && textarea.getAttribute("data-statusText") || "OK",
-          # content = {
-          #   html: root.innerHTML,
-          #   text: type ?
-          #     textarea.value :
-          #     root ? (root.textContent || root.innerText) : null
-          # };
-
-          # cleanUp();
-          # completeCallback(
-          #   status,
-          #   statusText,
-          #   content,
-          #   type ? ("Content-Type: " + type) : null
-          # );
-
+          completeRequest callback, 200, response, '', 'OK'
         # Now that the load handler has been set up, submit the form.
         $form.0.submit!
       # end of first load event
@@ -75,6 +56,28 @@ let angular = angular, element = angular.element, forEach = angular.forEach, ide
         .append $form
         .append $iframe
 
+      if timeout > 0
+        const timeoutId = $browserDefer timeoutRequest, timeout
+      else if timeout and timeout.then
+        timeout.then timeoutRequest
+
+
+      !function timeoutRequest
+        $form.remove!
+        $iframe.remove!
+        # status = ABORTED;
+        # jsonpDone && jsonpDone();
+        # xhr && xhr.abort();
+
+      !function completeRequest(callback, status, response, headersString, statusText)
+        # cancel timeout and subsequent timeout promise resolution
+        timeoutId and $browserDefer.cancel timeoutId
+
+        callback status, response, headersString, statusText
+
+        $browser.$$completeOutstandingRequest timeoutRequest
+
+
   function IFrameTransportEncoder (config)
     @_i  = []
     @enc config.data, ''
@@ -82,21 +85,20 @@ let angular = angular, element = angular.element, forEach = angular.forEach, ide
     config.method = "iframe:#{ config.method }"
     config.data = @_i
     config.transformRequest = identity
-    config
+    config    
 
   IFrameTransportEncoder::enc = !(data, keyPrefix) ->
     forEach data, !(value, key) ->
       key = encodeKey keyPrefix, key
-      const attr = do
-        type: 'hidden'
-        name: key
+      if value.$$inputEl
+        that.replaceWith that.clone!
+      else
+        switch typeOf value
+        | 'Function', 'Blob', 'FileList', 'File' => return# ignore
+        return @enc value, key if isObject value# encode nested object
+        that = element '<input type="hidden">' .val value
 
-      switch typeOf value
-      | 'Function', 'Blob' => return
-      | 'FileList', 'File' => return @_i.push value.$$inputElClone
-      | _ => return @enc value, key if isObject value
-
-      element '<input>' .attr attr .val value |> @_i.push
+      @_i.push that.attr 'name' key
     , @
 
 
@@ -134,16 +136,44 @@ let angular = angular, element = angular.element, forEach = angular.forEach, ide
 
   angular.module 'ng-form-data' <[
   ]>
-  .directive 'input' ->
+  .provider FileWithFormDataInterceptor, !->
 
+    @$get = <[
+           $window
+    ]> ++ ($window) ~>
+      const {FormData} = $window
+
+      @$isFormDataSupported = !!FormData
+
+      @$useFormData = @$isFormDataSupported unless '$useFormData' of @
+
+      const $useFormData = @$useFormData
+
+      $useFormData: $useFormData
+      request: ->
+        if lowercase it.method .match /^(get|head)$/i
+          it
+        else if $useFormData
+          new FormDataEncoder FormData, it
+        else
+          new IFrameTransportEncoder it
+
+  .directive 'input' [
+        FileWithFormDataInterceptor
+  ] ++ (FileWithFormDataInterceptor) ->
+
+    const {$useFormData} = FileWithFormDataInterceptor
+   
     !function postLinkFn ($scope, $element, $attrs, ctrl)
       const ngModelCtrl = ctrl or {$setViewValue: angular.noop}
       ngModelCtrl.$open = !-> $element.0.click!
 
       <-! $element.on 'change'
       const {files} = @
-      const viewValue = if $attrs.multiple then files else files.0
-      viewValue.$$inputElClone = @clone!
+      const viewValue = if $useFormData
+        if $attrs.multiple then files else files.0
+      else
+        $$inputEl: $element# cache the input
 
       <-! $scope.$apply
       ngModelCtrl.$setViewValue viewValue
@@ -154,23 +184,11 @@ let angular = angular, element = angular.element, forEach = angular.forEach, ide
       postLinkFn if 'file' is tAttrs.type
 
   .config <[
-          $httpProvider  $provide
-  ]> ++ !($httpProvider, $provide) ->
+          $httpProvider  $provide  FileWithFormDataInterceptorProvider
+  ]> ++ !($httpProvider, $provide, FileWithFormDataInterceptorProvider) ->
+
+    FileWithFormDataInterceptorProvider.$useFormData = false
 
     $httpProvider.interceptors.push FileWithFormDataInterceptor
 
     $provide.decorator '$httpBackend' httpBackendWithIframeTransport
-
-  .factory FileWithFormDataInterceptor, <[
-         $window
-  ]> ++ ($window) ->
-
-    const {FormData} = $window
-
-    request: ->
-      if lowercase it.method .match /^(get|head)$/i
-        it
-      # else if FormData
-      #   new FormDataEncoder FormData, it
-      else
-        new IFrameTransportEncoder it
