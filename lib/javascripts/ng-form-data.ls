@@ -102,7 +102,7 @@ let angular = angular, element = angular.element, forEach = angular.forEach, ide
     , @
 
 
-  function FormDataEncoder (FormData, config)
+  function FormDataEncoder (config, FormData)
     const {data} = config
     if 'FormData' is typeOf data
       @_d = data
@@ -145,18 +145,16 @@ let angular = angular, element = angular.element, forEach = angular.forEach, ide
 
       @$isFormDataSupported = !!FormData
 
-      @$useFormData = @$isFormDataSupported unless '$useFormData' of @
+      const $useFormData = if '$useFormData' of @ then @$useFormData
+      else @$useFormData = @$isFormDataSupported
 
-      const $useFormData = @$useFormData
+      const Encoder = if $useFormData then FormDataEncoder
+      else IFrameTransportEncoder
 
       $useFormData: $useFormData
       request: ->
-        if lowercase it.method .match /^(get|head)$/i
-          it
-        else if $useFormData
-          new FormDataEncoder FormData, it
-        else
-          new IFrameTransportEncoder it
+        if lowercase it.method .match /^(get|head)$/i then it
+        else new Encoder it, FormData
 
   .directive 'input' [
         FileWithFormDataInterceptor
@@ -184,10 +182,8 @@ let angular = angular, element = angular.element, forEach = angular.forEach, ide
       postLinkFn if 'file' is tAttrs.type
 
   .config <[
-          $httpProvider  $provide  FileWithFormDataInterceptorProvider
-  ]> ++ !($httpProvider, $provide, FileWithFormDataInterceptorProvider) ->
-
-    FileWithFormDataInterceptorProvider.$useFormData = false
+          $httpProvider  $provide
+  ]> ++ !($httpProvider, $provide) ->
 
     $httpProvider.interceptors.push FileWithFormDataInterceptor
 
