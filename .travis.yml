@@ -6,10 +6,6 @@ before_install:
 - sh -e /etc/init.d/xvfb start
 install: make install
 script: make test
-addons:
-  sauce_connect: true
 env:
   global:
-  - secure: ox8SHcMvhy1KoohHOwx7UK+7Hl+x/ig0I3YdAY7IWDpgMZhNfyi8XLF6QxU5JQVP76zFTGKOQBBKwqBQO+XkyPLE+NIPjxNu1PB1P9ZoS78kc3kz3m+MNbzMzPV/KCbGREb5TCOkqqaf20cH4Pi8wUFnqev2Fi+Et0kPVE1INtg=
-  - secure: Lr5sJrQJ0ZdX6qhKJkRr4N4JL8EHYtryvWPjh1Z9aiszOxQUHi9OYQ/t4rEcDfVV1m+3pN+IeBOukxKDvjwtFJnI8bKCslx6k991ChLZLJ7r1cD4txR1zPfKoSSkMrb30HmZs2S0AggH1ILAfmdAWSGiOT0ZaR2+JNT0HqUnKtg=
   - secure: HDBNxdK0TlUeIYVoUzVuUX0XrwhP+NpzGWIBK76u8EgOvDWWoh1XO6DVvYQ7k1KXAtbgrevQ79U/5+zx+AplTE+6JiL3Fjib1P8OGerIjCKe1rrW/ndhbRUuM//CxPwHhE9q/96eUHNkvTP6xIZZRx1z3Deye++R/sAaT77xOPU=
